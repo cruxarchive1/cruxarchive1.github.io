@@ -3,14 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Knight of the Crag // we are one on the crux</title>
-<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")</script>
+<title>The Crux Archive // we are one on the crux</title>
+<script>
+(function(){
+  var seen=null;
+  try{seen=sessionStorage.getItem("crux-seen")}catch(e){}
+  if(!seen&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js");
+})();
+</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap">
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="intro"><div class="in"><span id="it"></span></div></div>
 <div id="skip">// click to skip / toca para saltar</div>
+
+<header class="hd">
+  <span class="where">/home</span>
+  <a class="logo" href="index.html">The Crux Archive</a>
+  <button class="mb" id="mb" aria-expanded="false" aria-controls="panel">[index]</button>
+  <nav class="panel" id="panel" aria-label="index">
+    <ul>
+      <li><a href="about.html">[about]</a></li>
+      <li><a href="shop.html">[shop]</a></li>
+    </ul>
+  </nav>
+</header>
+
 <main>
 <pre class="c">&lt;!-- crux_archive / codex.html --&gt;</pre>
 <h1>Knight of the Crag</h1>
@@ -24,8 +46,8 @@
 <span class="c">// "Ato mi vida a la tuya, y la tuya a la mía."</span>
 
 <span class="art"><span class="b">{{</span> article.01 : <span class="k">check_thy_brother</span> <span class="b">}}</span>
-<span class="s">Ere thou leavest the ground, thine eyes shall read his knot, and his eyes thine. Harness, device, rope. Speak it aloud. Trust is spoken, never assumed.</span>
-<span class="es">// Antes de dejar el suelo, leerán tus ojos su nudo y los suyos el tuyo. Arnés, aparato, cuerda. Dilo en voz alta. La confianza se dice, nunca se supone.</span></span>
+<span class="s">Ere thou leavest the ground, thine eyes shall read his knot, and his eyes thine. Harness, buckle, device, rope. Speak it aloud. Trust is spoken, never assumed.</span>
+<span class="es">// Antes de dejar el suelo, leerán tus ojos su nudo y los suyos el tuyo. Arnés, hebilla, aparato, cuerda. Dilo en voz alta. La confianza se dice, nunca se supone.</span></span>
 <span class="art"><span class="b">{{</span> article.02 : <span class="k">hold_the_rope</span> <span class="b">}}</span>
 <span class="s"><span class="k">try</span> { climb(); }
 <span class="k">catch</span> (fall) { hold(brother); }
@@ -33,7 +55,7 @@ A fall is no shame. A slack hand is.</span>
 <span class="es">// Caer no es vergüenza. La mano floja, sí.</span></span>
 <span class="art"><span class="b">{{</span> article.03 : <span class="k">share_the_beta</span> <span class="b">}}</span>
 <span class="s">What the wall hath shown thee, show thy fellows: the hidden foot, the kind hold, the way round. Beta is bread, and bread is broken at the base.</span>
-<span class="es">// Lo que la pared te mostró, muéstralo a tus compañeros: el pie escondido, el agarre amable, el como moverse. La beta es pan, y el pan se parte al pie de la pared.</span></span>
+<span class="es">// Lo que la pared te mostró, muéstralo a tus compañeros: el pie escondido, la presa amable, el camino de rodeo. La beta es pan, y el pan se parte al pie de la pared.</span></span>
 <span class="art"><span class="b">{{</span> article.04 : <span class="k">leave_no_trace</span> <span class="b">}}</span>
 <span class="s">Take thy chalk, thy tape, thy crumbs. The stone was here before thee, and shall be after.</span>
 <span class="es">// Llévate tu magnesia, tu cinta, tus migajas. La piedra estaba aquí antes que tú, y seguirá después.</span></span>
@@ -58,12 +80,15 @@ A fall is no shame. A slack hand is.</span>
 // slowly building something. / construyendo algo, despacio.</pre>
 </footer>
 </main>
+
+<script src="menu.js"></script>
 <script>
 (function(){
   var R=document.documentElement;
   if(!R.classList.contains("js"))return;
+  try{sessionStorage.setItem("crux-seen","1")}catch(e){}
   var skip=false;
-  ["click","keydown","touchstart"].forEach(function(e){addEventListener(e,function(){skip=true},{once:true,passive:true})});
+  ["click","keydown"].forEach(function(e){addEventListener(e,function(){skip=true},{once:true,passive:true})});
   var sleep=function(ms){return skip?Promise.resolve():new Promise(function(r){setTimeout(r,ms)})};
   var cur=document.createElement("span");cur.className="cur";
   var nodes=[];
