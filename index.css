@@ -1,0 +1,35 @@
+:root{
+  --bg:#e4e2d8; --ink:#1d201e; --dim:#6c7064; --lichen:#55662b; --blood:#8c2f39;
+  --blackletter:"UnifrakturCook","Old English Text MT","Luminari",Georgia,serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#1b1d1b;--ink:#e4e2d8;--dim:#858a7b;--lichen:#a3b06c;--blood:#c9707a;}
+}
+:root[data-theme="dark"]{--bg:#1b1d1b;--ink:#e4e2d8;--dim:#858a7b;--lichen:#a3b06c;--blood:#c9707a;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.75}
+main{max-width:64ch;margin:0 auto;padding:12vh 22px 14vh}
+h1{font-family:var(--blackletter);font-weight:700;font-size:clamp(46px,13vw,92px);line-height:1;margin:.15em 0 .1em;letter-spacing:.01em}
+.sub{color:var(--lichen);margin:0 0 3.5rem;font-size:1.05em}
+pre{margin:0;font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}
+.c{color:var(--dim)} .k{color:var(--lichen)} .b{color:var(--blood)} .s{color:var(--ink)}
+.art{display:block;margin-top:2.4rem}
+.art .s{display:block;padding-left:2ch}
+.art .es{display:block;padding-left:2ch;margin-top:.5rem;color:var(--dim)}
+footer{margin-top:4rem;color:var(--dim)}
+
+html.js main{opacity:0}
+html.js.on main{opacity:1;transition:opacity .6s}
+#intro,#skip{display:none}
+html.js #intro{position:fixed;inset:0;z-index:5;background:var(--bg);display:flex;align-items:center;padding:0 22px;transition:opacity .6s}
+html.js #intro.out{opacity:0;pointer-events:none}
+#intro .in{width:100%;max-width:64ch;margin:0 auto;font-size:clamp(20px,5.4vw,30px);color:var(--lichen)}
+html.js #skip{display:block;position:fixed;z-index:6;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));font-size:12px;color:var(--dim)}
+.cur{display:inline-block;width:.6ch;height:1.15em;vertical-align:text-bottom;background:var(--lichen);margin-left:2px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cur{animation:none}}

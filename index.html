@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knight of the Crag // we are one on the crux</title>
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap">
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div id="intro"><div class="in"><span id="it"></span></div></div>
+<div id="skip">// click to skip / toca para saltar</div>
+<main>
+<pre class="c">&lt;!-- crux_archive / codex.html --&gt;</pre>
+<h1>Knight of the Crag</h1>
+<p class="sub">// we are one on the crux<br><span class="c">// somos uno en el crux</span></p>
+
+<pre id="code">
+<span class="c">/* the codex of the crag. unwritten, yet well kept. */
+/* el código del cerro. no escrito, pero bien guardado. */</span>
+
+<span class="k">const</span> oath = <span class="s">"I tie my life to thine, and thine to mine."</span>;
+<span class="c">// "Ato mi vida a la tuya, y la tuya a la mía."</span>
+
+<span class="art"><span class="b">{{</span> article.01 : <span class="k">check_thy_brother</span> <span class="b">}}</span>
+<span class="s">Ere thou leavest the ground, thine eyes shall read his knot, and his eyes thine. Harness, buckle, device, rope. Speak it aloud. Trust is spoken, never assumed.</span>
+<span class="es">// Antes de dejar el suelo, leerán tus ojos su nudo y los suyos el tuyo. Arnés, hebilla, aparato, cuerda. Dilo en voz alta. La confianza se dice, nunca se supone.</span></span>
+<span class="art"><span class="b">{{</span> article.02 : <span class="k">hold_the_rope</span> <span class="b">}}</span>
+<span class="s"><span class="k">try</span> { climb(); }
+<span class="k">catch</span> (fall) { hold(brother); }
+A fall is no shame. A slack hand is.</span>
+<span class="es">// Caer no es vergüenza. La mano floja, sí.</span></span>
+<span class="art"><span class="b">{{</span> article.03 : <span class="k">share_the_beta</span> <span class="b">}}</span>
+<span class="s">What the wall hath shown thee, show thy fellows: the hidden foot, the kind hold, the way round. Beta is bread, and bread is broken at the base.</span>
+<span class="es">// Lo que la pared te mostró, muéstralo a tus compañeros: el pie escondido, la presa amable, el camino de rodeo. La beta es pan, y el pan se parte al pie de la pared.</span></span>
+<span class="art"><span class="b">{{</span> article.04 : <span class="k">leave_no_trace</span> <span class="b">}}</span>
+<span class="s">Take thy chalk, thy tape, thy crumbs. The stone was here before thee, and shall be after.</span>
+<span class="es">// Llévate tu magnesia, tu cinta, tus migajas. La piedra estaba aquí antes que tú, y seguirá después.</span></span>
+<span class="art"><span class="b">{{</span> article.05 : <span class="k">walk_the_approach</span> <span class="b">}}</span>
+<span class="s">The walk is part of the climb. No knight is left behind in the forest, and none walketh the way back alone.</span>
+<span class="es">// La caminata es parte de la escalada. Ningún caballero se queda atrás en el bosque, y ninguno regresa solo.</span></span>
+<span class="art"><span class="b">{{</span> article.06 : <span class="k">be_a_guest</span> <span class="b">}}</span>
+<span class="s">The crag is a house, and thou art a guest. Greet the land, the locals, and the loose rock beneath.</span>
+<span class="es">// El cerro es una casa y tú eres su huésped. Saluda a la tierra, a la gente del lugar y a la roca suelta bajo tus pies.</span></span>
+<span class="art"><span class="b">{{</span> article.07 : <span class="k">keep_the_archive</span> <span class="b">}}</span>
+<span class="s">What was lived upon the wall shall be written: the route, the weather, the faces, the fall. For the knight forgetteth. The archive doth not.</span>
+<span class="es">// Lo vivido en la pared se escribe: la vía, el clima, los rostros, la caída. Porque el caballero olvida. El archivo no.</span></span>
+<span class="art"><span class="b">{{</span> article.08 : <span class="k">the_crux</span> <span class="b">}}</span>
+<span class="s">At the crux no man climbeth alone. Fear is spoken softly, and held in common.
+<span class="k">return</span> "we are one on the crux";</span>
+<span class="es">// En el crux nadie escala solo. El miedo se dice en voz baja y se carga entre todos.
+// return "somos uno en el crux";</span></span>
+</pre>
+
+<footer>
+<pre id="foot">// crux_archive. field notes from the crag. / notas de campo desde el cerro.
+// slowly building something. / construyendo algo, despacio.</pre>
+</footer>
+</main>
+<script>
+(function(){
+  var R=document.documentElement;
+  if(!R.classList.contains("js"))return;
+  var skip=false;
+  ["click","keydown","touchstart"].forEach(function(e){addEventListener(e,function(){skip=true},{once:true,passive:true})});
+  var sleep=function(ms){return skip?Promise.resolve():new Promise(function(r){setTimeout(r,ms)})};
+  var cur=document.createElement("span");cur.className="cur";
+  var nodes=[];
+  ["code","foot"].forEach(function(id){
+    var w=document.createTreeWalker(document.getElementById(id),NodeFilter.SHOW_TEXT),n;
+    while((n=w.nextNode())){nodes.push([n,n.data]);n.data="";}
+  });
+  async function typeInto(node,text,d,nl){
+    for(var i=0;i<text.length;i++){
+      if(skip){node.data=text;return}
+      node.data=text.slice(0,i+1);
+      var ch=text.charAt(i);
+      await sleep(ch==="\n"?nl:d);
+      if(ch==="\n")cur.scrollIntoView({block:"nearest"});
+    }
+  }
+  (async function(){
+    var t=document.createTextNode("");
+    document.getElementById("it").appendChild(t);
+    t.after(cur);
+    await typeInto(t,"we are one on the crux...",70,0);
+    await sleep(1100);
+    document.getElementById("intro").classList.add("out");
+    R.classList.add("on");
+    await sleep(700);
+    for(var i=0;i<nodes.length;i++){
+      nodes[i][0].after(cur);
+      await typeInto(nodes[i][0],nodes[i][1],6,80);
+    }
+    cur.scrollIntoView({block:"nearest"});
+    var sk=document.getElementById("skip");if(sk)sk.remove();
+    var it=document.getElementById("intro");if(it)it.remove();
+  })();
+})();
+</script>
+</body>
+</html>
